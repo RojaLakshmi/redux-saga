@@ -49,7 +49,7 @@ test("test case for createUserSaga. . .", async assert => {
   // resets the sagaTester store
   sagaTester.reset(true);
 
-  sagaTester.start(createUserSaga);
+  // sagaTester.start(createUserSaga);
 
   sagaTester.dispatch(createUserFail());
   assert.true(
@@ -86,7 +86,7 @@ test("test case for createUserSaga. . .", async assert => {
 
 test("test cases for sendEmailSaga. . .", async assert => {
   sagaTester.reset(true);
-  sagaTester.start(sendEmailSaga);
+  // sagaTester.start(sendEmailSaga);
 
   sagaTester.dispatch(sendEmailFail());
   assert.true(
@@ -124,7 +124,7 @@ test("test cases for sendEmailSaga. . .", async assert => {
 
 test("test cases for verifyEmailSaga. . .", async assert => {
   sagaTester.reset(true);
-  sagaTester.start(verifyEmailSaga);
+  // sagaTester.start(verifyEmailSaga);
 
   sagaTester.dispatch(verifyEmailFail());
   assert.true(
@@ -163,7 +163,7 @@ test("test cases for verifyEmailSaga. . .", async assert => {
 
 test("test cases for sendSmsSaga. . .", async assert => {
   sagaTester.reset(true);
-  sagaTester.start(sendSmsSaga);
+  // sagaTester.start(sendSmsSaga);
 
   sagaTester.dispatch(sendSmsFail());
   assert.true(
@@ -201,7 +201,7 @@ test("test cases for sendSmsSaga. . .", async assert => {
 
 test("test cases for verifyXpubSaga. . .", async assert => {
   sagaTester.reset(true);
-  sagaTester.start(verifyXpubSaga);
+  // sagaTester.start(verifyXpubSaga);
 
   sagaTester.dispatch(verifyXpubFail());
   assert.true(

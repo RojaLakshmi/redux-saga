@@ -58,11 +58,7 @@ test("incrementAsyncSaga test case", assert => {
 });
 
 test("createUser test case", assert => {
-  const gen = cloneableGenerator(createUserSaga)();
-  const result = {
-    userDetails: {}
-  };
-  const inputData = {
+  const params = {
     phone: "7466165312",
     country_code: "44",
     verification_code: "4935", // a 4-digit verification code,
@@ -71,6 +67,10 @@ test("createUser test case", assert => {
       "AC8O0OCGMPMHMTSG28STQZ9HCCXC6VQ7OZGVW4LV4BYTBYINC4IOLZJGFIULNXLF",
     initial_address_type: "simple"
   };
+  const result = {
+    userDetails: {}
+  };
+  const gen = cloneableGenerator(createUserSaga)({ params });
 
   assert.test("if user details are not created", a => {
     const clone = gen.clone();
@@ -92,7 +92,7 @@ test("createUser test case", assert => {
 
     a.deepEqual(
       clone.next().value,
-      call(createService, inputData),
+      call(createService, params),
       "createService should yield an Effect call(createService, {})"
     );
 
@@ -109,7 +109,8 @@ test("createUser test case", assert => {
 });
 
 test("sendEmail test case", assert => {
-  const gen = cloneableGenerator(sendEmailSaga)();
+  const params = { email: "hemanth.vja@gmail.com" };
+  const gen = cloneableGenerator(sendEmailSaga)({ params });
   const result = {
     success: true
   };
@@ -119,7 +120,7 @@ test("sendEmail test case", assert => {
 
     a.deepEqual(
       clone.next().value,
-      call(sendEmailService, { email: "hemanth.vja@gmail.com" }),
+      call(sendEmailService, params),
       "sendEmailService should yied an Effect call(sendEmailService, {})"
     );
 
@@ -152,7 +153,11 @@ test("sendEmail test case", assert => {
 });
 
 test("verifyEmail test case", assert => {
-  const gen = cloneableGenerator(verifyEmailSaga)();
+  const params = {
+    token: "WGRYTYEHDPUTRDDWCTGFGUIAIQZLGWGTE5Y4KYVGR9REGB9UQHNVCNPV3MMNDLDM"
+  };
+
+  const gen = cloneableGenerator(verifyEmailSaga)({ params });
   const result = {
     success: true
   };
@@ -161,10 +166,7 @@ test("verifyEmail test case", assert => {
     const clone = gen.clone();
     a.deepEqual(
       clone.next().value,
-      call(verifyEmailService, {
-        token:
-          "WGRYTYEHDPUTRDDWCTGFGUIAIQZLGWGTE5Y4KYVGR9REGB9UQHNVCNPV3MMNDLDM"
-      }),
+      call(verifyEmailService, params),
       "verifyEmailService should yied an Effect call(emailService, {token})"
     );
 
@@ -199,7 +201,12 @@ test("verifyEmail test case", assert => {
 });
 
 test("sendSms test case", assert => {
-  const gen = cloneableGenerator(sendSmsSaga)();
+  const params = {
+    phone: 7466165312,
+    country_code: 44
+  };
+
+  const gen = cloneableGenerator(sendSmsSaga)({ params });
   const result = {
     uuid: "b80698a0-c11d-0137-d628-0e1884c6f6fe",
     success: true,
@@ -213,10 +220,7 @@ test("sendSms test case", assert => {
     const clone = gen.clone();
     a.deepEqual(
       clone.next().value,
-      call(smsService, {
-        phone: 7466165312,
-        country_code: 44
-      }),
+      call(smsService, params),
       "verifySmsService should yied an Effect call(smsService, {})"
     );
 
@@ -252,7 +256,13 @@ test("sendSms test case", assert => {
 });
 
 test("xPub test case", assert => {
-  const gen = cloneableGenerator(verifyXpubSaga)();
+  const params = {
+    xpub_key:
+      "xpub6CojA7MuQ3TRPEkV6PRR6pzCqNBmNEKRG4gNmapeayeuwJxXYxCGz65DPVDfnXwHurpsbGgr9Noac4bY81XY3T42jKU1vcnVmQBr6LNgnXZ",
+    xpub_path: "m/0/x"
+  };
+
+  const gen = cloneableGenerator(verifyXpubSaga)({ params });
   const result = {
     success: true,
     first_addresses: [
@@ -278,11 +288,7 @@ test("xPub test case", assert => {
     const clone = gen.clone();
     a.deepEqual(
       clone.next().value,
-      call(xpubService, {
-        xpub_key:
-          "xpub6CojA7MuQ3TRPEkV6PRR6pzCqNBmNEKRG4gNmapeayeuwJxXYxCGz65DPVDfnXwHurpsbGgr9Noac4bY81XY3T42jKU1vcnVmQBr6LNgnXZ",
-        xpub_path: "m/0/x"
-      }),
+      call(xpubService, params),
       "verifyXpubService should yied an Effect call(xpubService, {})"
     );
 

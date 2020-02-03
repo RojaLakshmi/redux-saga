@@ -40,17 +40,9 @@ export function* decrementSaga() {
   yield put(decrement());
 }
 
-export function* createUserSaga() {
-  yield take(types.CREATE_USER_REQUEST);
-  const result = yield call(createService, {
-    phone: "7466165312",
-    country_code: "44",
-    verification_code: "4935", // a 4-digit verification code,
-    email: "hemanth.vja@gmail.com",
-    bitcoin_address:
-      "AC8O0OCGMPMHMTSG28STQZ9HCCXC6VQ7OZGVW4LV4BYTBYINC4IOLZJGFIULNXLF",
-    initial_address_type: "simple"
-  });
+export function* createUserSaga({ params }) {
+  // yield take(types.CREATE_USER_REQUEST);
+  const result = yield call(createService, params);
   if (!result || !result.data) {
     yield put(createUserFail());
   } else {
@@ -58,11 +50,9 @@ export function* createUserSaga() {
   }
 }
 
-export function* sendEmailSaga(args) {
-  yield take(types.SEND_EMAIL_REQUEST);
-  const result = yield call(sendEmailService, {
-    email: "hemanth.vja@gmail.com"
-  });
+export function* sendEmailSaga({ params }) {
+  // yield take(types.SEND_EMAIL_REQUEST);
+  const result = yield call(sendEmailService, params);
   console.log("Email result", result);
   if (!result) {
     yield put(sendEmailFail());
@@ -71,12 +61,9 @@ export function* sendEmailSaga(args) {
   }
 }
 
-export function* sendSmsSaga(args) {
-  yield take(types.SEND_SMS_REQUEST);
-  const result = yield call(smsService, {
-    phone: 7466165312,
-    country_code: 44
-  });
+export function* sendSmsSaga({ params }) {
+  // yield take(types.SEND_SMS_REQUEST);
+  const result = yield call(smsService, params);
   console.log("SMS result", result);
   if (!result) {
     yield put(sendSmsFail());
@@ -85,11 +72,9 @@ export function* sendSmsSaga(args) {
   }
 }
 
-export function* verifyEmailSaga(args) {
-  yield take(types.VERIFY_EMAIL_REQUEST);
-  const result = yield call(verifyEmailService, {
-    token: "WGRYTYEHDPUTRDDWCTGFGUIAIQZLGWGTE5Y4KYVGR9REGB9UQHNVCNPV3MMNDLDM"
-  });
+export function* verifyEmailSaga({ params }) {
+  // yield take(types.VERIFY_EMAIL_REQUEST);
+  const result = yield call(verifyEmailService, params);
   console.log("Email token result", result);
   if (!result) {
     yield put(verifyEmailFail());
@@ -98,13 +83,9 @@ export function* verifyEmailSaga(args) {
   }
 }
 
-export function* verifyXpubSaga() {
-  yield take(types.VERIFY_XPUB_REQUEST);
-  const result = yield call(xpubService, {
-    xpub_key:
-      "xpub6CojA7MuQ3TRPEkV6PRR6pzCqNBmNEKRG4gNmapeayeuwJxXYxCGz65DPVDfnXwHurpsbGgr9Noac4bY81XY3T42jKU1vcnVmQBr6LNgnXZ",
-    xpub_path: "m/0/x"
-  });
+export function* verifyXpubSaga({ params }) {
+  // yield take(types.VERIFY_XPUB_REQUEST);
+  const result = yield call(xpubService, params);
   console.log("XPUB RESULT", result);
   if (!result) {
     yield put(verifyXpubFail());
