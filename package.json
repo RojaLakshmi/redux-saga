@@ -6,7 +6,9 @@
   "scripts": {
     "test": "babel-node ./simple-store/sagas/index.spec.js | tap-spec",
     "test:reducers": "babel-node ./simple-store/reducers/index.spec.js | tap-spec",
-    "start": "budo main.js:build.js --dir ./ --verbose  --live -- -t babelify"
+    "start": "budo main.js:build.js --dir ./ --verbose  --live -- -t babelify",
+    "key": "value",
+    "key1": "value1"
   },
   "repository": {
     "type": "git",
